@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Step 1: Create a list of integers
+        List<int> numbers = new List<int> { 10, 20, 30, 40, 50 };
+
+        // Step 2: Prompt the user for a number to divide each list item by
+        Console.WriteLine("Please enter a number to divide each item in the list by:");
+
+        try
+        {
+            // Step 3: Read and convert user input to an integer
+            int divisor = Convert.ToInt32(Console.ReadLine());
+
+            // Step 4: Loop through the list and divide each number by the user's input
+            foreach (int number in numbers)
+            {
+                int result = number / divisor;  // This line may throw DivideByZeroException if divisor is 0
+                Console.WriteLine($"{number} divided by {divisor} is {result}");
+            }
+        }
+        catch (DivideByZeroException)
+        {
+            // Handle division by zero errors
+            Console.WriteLine("Error: You cannot divide by zero.");
+        }
+        catch (FormatException)
+        {
+            // Handle format errors when input is not a valid integer
+            Console.WriteLine("Error: Please enter a valid integer.");
+        }
+        catch (Exception ex)
+        {
+            // Handle any other unexpected exceptions
+            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+        }
+        finally
+        {
+            // This block executes whether or not an exception occurs
+            Console.WriteLine("Program has exited the try/catch block and continued executing.");
+        }
+
+        // Additional program execution (if any)
+        Console.WriteLine("End of program. Thank you for using the application!");
+
+        // Pause to allow the user to see the output before the program closes
+        Console.ReadKey();
+    }
+}
